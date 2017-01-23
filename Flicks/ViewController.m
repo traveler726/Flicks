@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "MovieCell.h"
 #import "MovieModel.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>  // Adds functionality to the ImageView
 
 @interface ViewController () <UITableViewDataSource>;
 
@@ -38,7 +39,7 @@
     NSURLSession *session =
     [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                   delegate:nil
-                             delegateQueue:[NSOperationQueue mainQueue]];
+                             delegateQueue:[NSOperationQueue mainQueue]];  // Delegation to the mainQueue will guarentee it is on the main thread.
     
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:^(NSData * _Nullable data,
@@ -65,6 +66,7 @@
                                                     // Since ViewController is defined as non-mutable the access to it will be non-mutable.
                                                     // This is true even tho the backing object is actually a mutable array.
                                                     self.movies = models;
+                                                    
                                                     // force the tableView new info to display
                                                     [self performSelectorOnMainThread:@selector(reloadTheData) withObject:(nil) waitUntilDone:(NO)];
                                                 } else {
@@ -88,13 +90,15 @@
     
     MovieCell* cell = [tableView dequeueReusableCellWithIdentifier:@"movieCell" forIndexPath:indexPath];
     
-    [cell.titleLabel setText:[NSString stringWithFormat:@"Row %ld", indexPath.row]];
-    [cell.overviewLabel setText:[NSString stringWithFormat:@"Overview for row %ld", indexPath.row]];
-    [cell.posterImage setImage:[UIImage imageNamed:@"poster_placeholder.png"]];
+//  [cell.titleLabel setText:[NSString stringWithFormat:@"Row %ld", indexPath.row]];
+//  [cell.overviewLabel setText:[NSString stringWithFormat:@"Overview for row %ld", indexPath.row]];
+//  [cell.posterImage setImage:[UIImage imageNamed:@"poster_placeholder.png"]];
     
     MovieModel *model = [self.movies objectAtIndex:indexPath.row];
     cell.titleLabel.text = model.title;
     cell.overviewLabel.text = model.movieDescription;
+//  cell.posterImage.contentMode = UIViewContentModeScaleAspectFit;  // can also set in the storyboard view.
+    [cell.posterImage setImageWithURL:model.posterURL];
     
     NSLog(@"Loading Row:$%ld", indexPath.row);
 
