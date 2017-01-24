@@ -17,6 +17,8 @@
 
 @property (strong, nonatomic) NSArray<MovieModel *> *movies;
 
+@property (strong, nonatomic) NSString *movieApiPath;
+
 @end
 
 @implementation ViewController
@@ -24,16 +26,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.movieTableView.dataSource = self;
+    self.movieTableView.dataSource = self;    //if ([self.restorationIdentifier]
+    if (self.restorationIdentifier) {
+        self.movieApiPath = self.restorationIdentifier;
+    } else {
+        self.movieApiPath = @"popular";
+        self.movieApiPath = self.restorationIdentifier;
+    }
+    NSLog(@"Restoration ID: %@ and MovieAPIPath: %@", self.restorationIdentifier, self.movieApiPath);
     [self fetchMovies];
 }
 
 - (void) fetchMovies {
     NSString *apiKey = @"a07e22bc18f5cb106bfe4cc1f83ad8ed";
-    NSString *urlString =
-    [@"https://api.themoviedb.org/3/movie/now_playing?api_key=" stringByAppendingString:apiKey];
+//    NSString *urlString = [@"https://api.themoviedb.org/3/movie/now_playing?api_key=" stringByAppendingString:apiKey];
     
-    NSURL *url = [NSURL URLWithString:urlString];
+    NSString *movieApiURL = [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@", self.movieApiPath, apiKey];
+    NSLog(@"\tUsing Moving API URL: %@", movieApiURL);
+    
+    NSURL *url = [NSURL URLWithString:movieApiURL];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     
     NSURLSession *session =
