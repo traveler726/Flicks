@@ -1,14 +1,14 @@
 //
-//  MovieCell.m
+//  MovieTableViewCell.m
 //  Flicks
 //
 //  Created by Jennifer Beck on 1/23/17.
 //  Copyright © 2017 JenniferBeck. All rights reserved.
 //
 
-#import "MovieCell.h"
+#import "MovieTableViewCell.h"
 
-@implementation MovieCell
+@implementation MovieTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

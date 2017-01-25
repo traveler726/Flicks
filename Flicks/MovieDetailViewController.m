@@ -7,7 +7,7 @@
 //
 
 #import "MovieDetailViewController.h"
-#import "MovieCell.h"
+#import "MovieTableViewCell.h"
 #import "MovieModel.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>  // Adds functionality to the ImageView
 
