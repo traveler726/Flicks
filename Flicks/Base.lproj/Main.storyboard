@@ -54,6 +54,7 @@
                                             <outlet property="overviewLabel" destination="flF-fm-acW" id="GeG-rB-FAj"/>
                                             <outlet property="posterImage" destination="3D6-lH-ilT" id="31w-Nj-Meb"/>
                                             <outlet property="titleLabel" destination="X0t-fS-jbB" id="qX7-vw-3R6"/>
+                                            <segue destination="r6i-gp-OB4" kind="show" id="DMn-3z-wFr"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -71,10 +72,10 @@
             </objects>
             <point key="canvasLocation" x="-1770.4000000000001" y="-8276.3118440779617"/>
         </scene>
-        <!--View Controller-->
+        <!--Movie Detail View Controller-->
         <scene sceneID="G8R-eI-8YD">
             <objects>
-                <viewController restorationIdentifier="movie_detail_view" id="r6i-gp-OB4" sceneMemberID="viewController">
+                <viewController restorationIdentifier="movie_detail_view" id="r6i-gp-OB4" customClass="MovieDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bf7-h4-c69"/>
                         <viewControllerLayoutGuide type="bottom" id="Dwm-VJ-nXu"/>
@@ -181,6 +182,7 @@
                                             <outlet property="overviewLabel" destination="nnc-oo-UcS" id="IYk-nu-NMy"/>
                                             <outlet property="posterImage" destination="48Q-Jj-W46" id="DP1-HE-LvH"/>
                                             <outlet property="titleLabel" destination="6MQ-HM-phn" id="Sru-Kl-NJl"/>
+                                            <segue destination="r6i-gp-OB4" kind="show" id="bMW-xd-9eQ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -236,4 +238,7 @@
             <point key="canvasLocation" x="-3948" y="-7938"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="bMW-xd-9eQ"/>
+    </inferredMetricsTieBreakers>
 </document>
