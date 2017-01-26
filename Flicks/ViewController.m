@@ -42,6 +42,17 @@
     NSLog(@"Restoration ID: %@ and MovieAPIPath: %@", self.restorationIdentifier, self.movieApiPath);
     
     // Good place to setup your views here in this method.  View has loaded and good place to add subviews.
+    [self setupCollectionView];
+    
+    // Which View should be visible first?
+    self.collectionView.hidden = NO;
+    self.movieTableView.hidden = !self.collectionView.hidden;
+    
+    [self fetchMovies];
+}
+
+- (void) setupCollectionView {
+    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     CGFloat screenWidth = CGRectGetWidth(self.view.bounds);
     CGFloat itemHeigth = 150;
@@ -53,8 +64,7 @@
     //UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectInset(self.view.bounds, 0, 64) collectionViewLayout:layout];
     collectionView.backgroundColor = [UIColor magentaColor];
-    collectionView.hidden = YES;  // start in the hidden state so the tableView by the storyboard shows up and not this GRID!
-    //self.movieTableView.hidden = YES;
+
     [collectionView registerClass:[MoviePosterCollectionViewCell class] forCellWithReuseIdentifier:@"MoviePosterCollectionViewCell"];
     collectionView.dataSource = self;
     collectionView.delegate   = self;
@@ -62,7 +72,6 @@
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
 
-    [self fetchMovies];
 }
 
 - (void) fetchMovies {
