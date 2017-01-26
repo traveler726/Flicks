@@ -53,8 +53,8 @@
     //UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectInset(self.view.bounds, 0, 64) collectionViewLayout:layout];
     collectionView.backgroundColor = [UIColor magentaColor];
-    //collectionView.hidden = YES;  // start in the hidden state so the tableView by the storyboard shows up and not this GRID!
-    self.movieTableView.hidden = YES;
+    collectionView.hidden = YES;  // start in the hidden state so the tableView by the storyboard shows up and not this GRID!
+    //self.movieTableView.hidden = YES;
     [collectionView registerClass:[MoviePosterCollectionViewCell class] forCellWithReuseIdentifier:@"MoviePosterCollectionViewCell"];
     collectionView.dataSource = self;
     collectionView.delegate   = self;
@@ -67,7 +67,6 @@
 
 - (void) fetchMovies {
     NSString *apiKey = @"a07e22bc18f5cb106bfe4cc1f83ad8ed";
-//    NSString *urlString = [@"https://api.themoviedb.org/3/movie/now_playing?api_key=" stringByAppendingString:apiKey];
     
     NSString *movieApiURL = [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@?api_key=%@", self.movieApiPath, apiKey];
     NSLog(@"\tUsing Moving API URL: %@", movieApiURL);
