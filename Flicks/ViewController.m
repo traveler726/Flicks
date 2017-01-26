@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "MovieTableViewCell.h"
 #import "MovieModel.h"
+#import "MovieDetailViewController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>  // Adds functionality to the ImageView
 
 @interface ViewController () <UITableViewDataSource>;
@@ -118,6 +119,20 @@
 
 - (NSInteger)tableView:(UITableView *)movieTableView numberOfRowsInSection:(NSInteger)section {
     return self.movies.count;
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"showMovieDetailsControllerSeque"] ) {
+        
+        MovieDetailViewController *destViewController = [segue destinationViewController];
+        // Two ways to convert sender to a row index --> one puts extra pointer on heap.
+        //MovieTableViewCell *tableCell = (MovieTableViewCell *)sender;
+        //NSIndexPath *indexPath = [self.movieTableView indexPathForCell:tableCell];
+        NSIndexPath *indexPath = [self.movieTableView indexPathForCell:((UITableViewCell *) sender)];
+        destViewController.movieModel = [self.movies objectAtIndex:indexPath.row];
+        
+    }
 }
 
 @end

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MovieModel.h"
 
 @interface MovieDetailViewController : UIViewController
 
+@property MovieModel *movieModel;
 
 @end
 

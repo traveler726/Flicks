@@ -13,6 +13,12 @@
 
 @interface MovieDetailViewController () ;
 
+@property (weak, nonatomic) IBOutlet UIImageView *posterImageView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView; // Actual ScrollView object.
+@property (weak, nonatomic) IBOutlet UIView *scrollableView;   // Scrollable View container inside scrollView
+@property (weak, nonatomic) IBOutlet UILabel *titleView;       // Inside scrollableView container
+@property (weak, nonatomic) IBOutlet UILabel *overviewView;    // Inside scrollableView container
+
 @end
 
 @implementation MovieDetailViewController
@@ -25,6 +31,12 @@
 
 - (void) fetchMovieDetails {
     NSLog (@"TBD - fetch the movie details here");
+    if (self.movieModel) {
+        NSLog (@"Detail called with movie: %@", self.movieModel);
+        self.titleView.text    = self.movieModel.title;
+        self.overviewView.text = self.movieModel.movieDescription;
+        [self.posterImageView setImageWithURL:self.movieModel.posterURL];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

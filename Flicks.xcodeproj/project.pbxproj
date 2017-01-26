@@ -13,11 +13,11 @@
 		1AD305161E36719000E92B05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AD305141E36719000E92B05 /* Main.storyboard */; };
 		1AD305181E36719000E92B05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AD305171E36719000E92B05 /* Assets.xcassets */; };
 		1AD3051B1E36719000E92B05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AD305191E36719000E92B05 /* LaunchScreen.storyboard */; };
-		1AD305271E3690D500E92B05 /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD305261E3690D500E92B05 /* MovieCell.m */; };
 		1AD305291E3692BA00E92B05 /* yosemite.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 1AD305281E3692BA00E92B05 /* yosemite.JPG */; };
 		1AD3052C1E36AEDF00E92B05 /* MovieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD3052B1E36AEDF00E92B05 /* MovieModel.m */; };
 		1AD3052E1E36BB1B00E92B05 /* poster_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AD3052D1E36BB1B00E92B05 /* poster_placeholder.png */; };
 		1AD3055C1E39611600E92B05 /* MovieDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD3055B1E39611600E92B05 /* MovieDetailViewController.m */; };
+		1AD305621E396E1000E92B05 /* MovieTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD305611E396E1000E92B05 /* MovieTableViewCell.m */; };
 		670D0C610477FD3226751C4B /* libPods-Flicks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BB00DF24CBE8DA2791887F8 /* libPods-Flicks.a */; };
 /* End PBXBuildFile section */
 
@@ -32,14 +32,14 @@
 		1AD305171E36719000E92B05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1AD3051A1E36719000E92B05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AD3051C1E36719000E92B05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1AD305251E3690D500E92B05 /* MovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MovieCell.h; path = ../MovieCell.h; sourceTree = "<group>"; };
-		1AD305261E3690D500E92B05 /* MovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MovieCell.m; path = ../MovieCell.m; sourceTree = "<group>"; };
 		1AD305281E3692BA00E92B05 /* yosemite.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = yosemite.JPG; path = ../../../../../Pictures/Other/yosemite.JPG; sourceTree = "<group>"; };
 		1AD3052A1E36AEDF00E92B05 /* MovieModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieModel.h; sourceTree = "<group>"; };
 		1AD3052B1E36AEDF00E92B05 /* MovieModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieModel.m; sourceTree = "<group>"; };
 		1AD3052D1E36BB1B00E92B05 /* poster_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poster_placeholder.png; sourceTree = "<group>"; };
 		1AD3055A1E39611000E92B05 /* MovieDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDetailViewController.h; sourceTree = "<group>"; };
 		1AD3055B1E39611600E92B05 /* MovieDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDetailViewController.m; sourceTree = "<group>"; };
+		1AD305601E396E0700E92B05 /* MovieTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieTableViewCell.h; sourceTree = "<group>"; };
+		1AD305611E396E1000E92B05 /* MovieTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieTableViewCell.m; sourceTree = "<group>"; };
 		7487D05A632B2CBF76CD1E73 /* Pods-Flicks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flicks.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flicks/Pods-Flicks.release.xcconfig"; sourceTree = "<group>"; };
 		8BB00DF24CBE8DA2791887F8 /* libPods-Flicks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Flicks.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAB39BB9ADA4E9BB942E8350 /* Pods-Flicks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flicks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flicks/Pods-Flicks.debug.xcconfig"; sourceTree = "<group>"; };
@@ -80,10 +80,10 @@
 		1AD3050A1E36719000E92B05 /* Flicks */ = {
 			isa = PBXGroup;
 			children = (
+				1AD305611E396E1000E92B05 /* MovieTableViewCell.m */,
+				1AD305601E396E0700E92B05 /* MovieTableViewCell.h */,
 				1AD3055B1E39611600E92B05 /* MovieDetailViewController.m */,
 				1AD3055A1E39611000E92B05 /* MovieDetailViewController.h */,
-				1AD305261E3690D500E92B05 /* MovieCell.m */,
-				1AD305251E3690D500E92B05 /* MovieCell.h */,
 				1AD3050E1E36719000E92B05 /* AppDelegate.h */,
 				1AD3050F1E36719000E92B05 /* AppDelegate.m */,
 				1AD305111E36719000E92B05 /* ViewController.h */,
@@ -249,9 +249,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AD3055C1E39611600E92B05 /* MovieDetailViewController.m in Sources */,
+				1AD305621E396E1000E92B05 /* MovieTableViewCell.m in Sources */,
 				1AD305131E36719000E92B05 /* ViewController.m in Sources */,
 				1AD305101E36719000E92B05 /* AppDelegate.m in Sources */,
-				1AD305271E3690D500E92B05 /* MovieCell.m in Sources */,
 				1AD3052C1E36AEDF00E92B05 /* MovieModel.m in Sources */,
 				1AD3050D1E36719000E92B05 /* main.m in Sources */,
 			);
