@@ -65,7 +65,7 @@
     // Step 6 - Set the frame of the scrollview as well!
     CGRect scrollViewframe = self.scrollView.frame;
     scrollViewframe.size.height = maxOverviewY + 20;
-    scrollViewframe.origin.y = self.view.bounds.size.height - scrollViewframe.size.height - 10;
+    scrollViewframe.origin.y    = self.view.bounds.size.height - scrollViewframe.size.height - 10;
     self.scrollView.frame = scrollViewframe;
     
     // Debugging help here - will comment out later.

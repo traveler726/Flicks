@@ -24,12 +24,16 @@
 @property (strong, nonatomic) UICollectionView *collectionView; // Strong manages the destruction better!
 // CollectionView supports dynamic layout that is flexible.  Going to use defaultLayout now - but can do customLayout.
 
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setupRefresh];
+    
     // Do any additional setup after loading the view, typically from a nib.
     self.movieTableView.dataSource = self;    //if ([self.restorationIdentifier]
 
@@ -45,10 +49,11 @@
     [self setupCollectionView];
     
     // Which View should be visible first?
-    self.collectionView.hidden = NO;
+    self.collectionView.hidden = YES;
     self.movieTableView.hidden = !self.collectionView.hidden;
     
     [self fetchMovies];
+    
 }
 
 - (void) setupCollectionView {
@@ -121,6 +126,25 @@
                                                 }
                                             }];
     [task resume];
+}
+
+#pragma mark - UIRefreshControl
+
+- (void) setupRefresh {
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshControlAction) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+    [self.movieTableView addSubview:refreshControl];
+    [self.collectionView addSubview:refreshControl];
+}
+
+- (void) refreshControlAction {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM d, h:mm a"];
+    NSLog(@"Refreshing the data and view @ %@...", [formatter stringFromDate:[NSDate date]]);
+    [self fetchMovies];
+    [self reloadTheData];
+    [self.refreshControl endRefreshing];
 }
 
 #pragma mark - UICollectionViewDataSource
