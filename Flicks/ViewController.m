@@ -10,15 +10,19 @@
 #import "MovieTableViewCell.h"
 #import "MovieModel.h"
 #import "MovieDetailViewController.h"
+#import "MoviePosterCollectionViewCell.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>  // Adds functionality to the ImageView
 
-@interface ViewController () <UITableViewDataSource>;
+@interface ViewController () <UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate>;
 
 @property (weak, nonatomic) IBOutlet UITableView *movieTableView;
 
 @property (strong, nonatomic) NSArray<MovieModel *> *movies;
 
 @property (strong, nonatomic) NSString *movieApiPath;
+
+@property (strong, nonatomic) UICollectionView *collectionView; // Strong manages the destruction better!
+// CollectionView supports dynamic layout that is flexible.  Going to use defaultLayout now - but can do customLayout.
 
 @end
 
@@ -28,6 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.movieTableView.dataSource = self;    //if ([self.restorationIdentifier]
+
     if (self.restorationIdentifier) {
         self.movieApiPath = self.restorationIdentifier;
     } else {
@@ -35,6 +40,28 @@
         self.movieApiPath = self.restorationIdentifier;
     }
     NSLog(@"Restoration ID: %@ and MovieAPIPath: %@", self.restorationIdentifier, self.movieApiPath);
+    
+    // Good place to setup your views here in this method.  View has loaded and good place to add subviews.
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    CGFloat screenWidth = CGRectGetWidth(self.view.bounds);
+    CGFloat itemHeigth = 150;
+    CGFloat itemWidth  = screenWidth / 3;
+    layout.minimumLineSpacing = 0;
+    layout.minimumInteritemSpacing = 0;
+    layout.itemSize = CGSizeMake(itemWidth, itemHeigth);  // Setting a static size of the layout.
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    //UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectInset(self.view.bounds, 0, 64) collectionViewLayout:layout];
+    collectionView.backgroundColor = [UIColor magentaColor];
+    //collectionView.hidden = YES;  // start in the hidden state so the tableView by the storyboard shows up and not this GRID!
+    self.movieTableView.hidden = YES;
+    [collectionView registerClass:[MoviePosterCollectionViewCell class] forCellWithReuseIdentifier:@"MoviePosterCollectionViewCell"];
+    collectionView.dataSource = self;
+    collectionView.delegate   = self;
+    
+    [self.view addSubview:collectionView];
+    self.collectionView = collectionView;
+
     [self fetchMovies];
 }
 
@@ -88,9 +115,28 @@
     [task resume];
 }
 
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.movies.count;
+}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // We need the cell
+    MoviePosterCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MoviePosterCollectionViewCell" forIndexPath:indexPath];
+    MovieModel *model = [self.movies objectAtIndex:indexPath.item];
+    cell.model = model;
+    [cell reloadData];
+    
+    return cell;
+}
+
+
 // Moving the reload of the data into a separate method so can push to the main thread.
 - (void) reloadTheData {
     [self.movieTableView reloadData];
+    [self.collectionView reloadData];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

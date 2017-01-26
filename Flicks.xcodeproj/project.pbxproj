@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AA40BBA1E3A87E0003ED133 /* MoviePosterCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA40BB91E3A87E0003ED133 /* MoviePosterCollectionViewCell.m */; };
 		1AD3050D1E36719000E92B05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD3050C1E36719000E92B05 /* main.m */; };
 		1AD305101E36719000E92B05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD3050F1E36719000E92B05 /* AppDelegate.m */; };
 		1AD305131E36719000E92B05 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD305121E36719000E92B05 /* ViewController.m */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1AA40BB81E3A87E0003ED133 /* MoviePosterCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePosterCollectionViewCell.h; sourceTree = "<group>"; };
+		1AA40BB91E3A87E0003ED133 /* MoviePosterCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviePosterCollectionViewCell.m; sourceTree = "<group>"; };
 		1AD305081E36719000E92B05 /* Flicks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flicks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AD3050C1E36719000E92B05 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1AD3050E1E36719000E92B05 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -89,6 +92,8 @@
 				1AD3050F1E36719000E92B05 /* AppDelegate.m */,
 				1AD305111E36719000E92B05 /* ViewController.h */,
 				1AD305121E36719000E92B05 /* ViewController.m */,
+				1AA40BB81E3A87E0003ED133 /* MoviePosterCollectionViewCell.h */,
+				1AA40BB91E3A87E0003ED133 /* MoviePosterCollectionViewCell.m */,
 				1AD305171E36719000E92B05 /* Assets.xcassets */,
 				1AD305191E36719000E92B05 /* LaunchScreen.storyboard */,
 				1AD3051C1E36719000E92B05 /* Info.plist */,
@@ -252,6 +257,7 @@
 				1AD305621E396E1000E92B05 /* MovieTableViewCell.m in Sources */,
 				1AD305131E36719000E92B05 /* ViewController.m in Sources */,
 				1AD305101E36719000E92B05 /* AppDelegate.m in Sources */,
+				1AA40BBA1E3A87E0003ED133 /* MoviePosterCollectionViewCell.m in Sources */,
 				1AD3052C1E36AEDF00E92B05 /* MovieModel.m in Sources */,
 				1AD3050D1E36719000E92B05 /* main.m in Sources */,
 			);
