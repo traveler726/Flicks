@@ -80,6 +80,7 @@
 		1AD3050A1E36719000E92B05 /* Flicks */ = {
 			isa = PBXGroup;
 			children = (
+				1AD305141E36719000E92B05 /* Main.storyboard */,
 				1AD305611E396E1000E92B05 /* MovieTableViewCell.m */,
 				1AD305601E396E0700E92B05 /* MovieTableViewCell.h */,
 				1AD3055B1E39611600E92B05 /* MovieDetailViewController.m */,
@@ -88,7 +89,6 @@
 				1AD3050F1E36719000E92B05 /* AppDelegate.m */,
 				1AD305111E36719000E92B05 /* ViewController.h */,
 				1AD305121E36719000E92B05 /* ViewController.m */,
-				1AD305141E36719000E92B05 /* Main.storyboard */,
 				1AD305171E36719000E92B05 /* Assets.xcassets */,
 				1AD305191E36719000E92B05 /* LaunchScreen.storyboard */,
 				1AD3051C1E36719000E92B05 /* Info.plist */,

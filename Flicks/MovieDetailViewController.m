@@ -25,8 +25,38 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Configure/Setup the embedded scrollView now
+    [self setupScrollView];
+    
     NSLog(@"Restoration ID: %@", self.restorationIdentifier);
     [self fetchMovieDetails];
+}
+
+// Configure the embedded scrollView now
+- (void) setupScrollView {
+    NSInteger width = self.scrollView.bounds.size.width;
+    NSInteger height = self.scrollView.bounds.size.height * 3;
+    self.scrollView.contentSize = CGSizeMake(width,height);
+    
+
+    // Now setup the sub-view "container"
+    //  * background color.
+    //  * height based on the scrollView height.
+    
+    // Setting the background color:
+    //    Option 1
+    //      UIColor *bckgrndColor = [UIColor colorWithHue:60 saturation:0.2 brightness:1.0 alpha:1.0];
+    //      self.scrollableView.backgroundColor = bckgrndColor;
+    //    Option 2
+    //      self.scrollableView.backgroundColor = [UIColor lightGrayColor];
+    // self.scrollableView.backgroundColor = [UIColor lightGrayColor];
+    
+    // Setup the sizing of the sub scrollable view now
+    CGRect newFrame = self.scrollableView.frame;
+    newFrame.size.width  = self.scrollView.bounds.size.width;
+    newFrame.size.height = self.scrollView.bounds.size.height*3;
+    [self.scrollableView setFrame:newFrame];
 }
 
 - (void) fetchMovieDetails {
