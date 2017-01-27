@@ -143,6 +143,9 @@
     [formatter setDateFormat:@"MMM d, h:mm a"];
     NSLog(@"Refreshing the data and view @ %@...", [formatter stringFromDate:[NSDate date]]);
     
+    // Alternative way to do sync but main thread:
+    // move the work into a method "refreshControlWork" and do the following
+    //[self performSelectorOnMainThread:@selector(refreshControlWork) withObject:(nil) waitUntilDone:(NO)];
     dispatch_async(dispatch_get_main_queue(), ^{
         //Your main thread code goes in here
         [self fetchMovies];
