@@ -29,6 +29,7 @@
 @property (strong, nonatomic) UIRefreshControl *refreshCollectionControl;
 
 @property (weak, nonatomic) IBOutlet UIView *errorView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *seqControl;
 
 @end
 
@@ -52,8 +53,7 @@
     [self setupCollectionView];
     
     // Which View should be visible first?
-    self.collectionView.hidden = YES;
-    self.movieTableView.hidden = !self.collectionView.hidden;
+    [self setupSelectedView];
     
     [self setupErrorView];
     
@@ -298,6 +298,26 @@
         destViewController.movieModel = [self.movies objectAtIndex:indexPath.row];
         
     }
+}
+#pragma mark segmentation control
+
+- (void) setupSelectedView {
+    
+    NSInteger segIndex = self.seqControl.selectedSegmentIndex;
+    if (segIndex == 0) {
+        NSLog (@"Handling the click for the List View of the movies %ld", (long)segIndex);
+        self.movieTableView.hidden = NO;
+        self.collectionView.hidden = YES;
+    } else {
+        NSLog (@"Handling the click for the Grid View of the movies %ld", segIndex);
+        self.movieTableView.hidden = YES;
+        self.collectionView.hidden = NO;
+        
+    }
+}
+
+- (IBAction)segmentValueChange:(id)sender {
+    [self setupSelectedView];
 }
 
 @end
