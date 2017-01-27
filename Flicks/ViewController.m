@@ -72,7 +72,7 @@
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     //UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectInset(self.view.bounds, 0, 64) collectionViewLayout:layout];
-    collectionView.backgroundColor = [UIColor magentaColor];
+    collectionView.backgroundColor = [UIColor blueColor];
 
     [collectionView registerClass:[MoviePosterCollectionViewCell class] forCellWithReuseIdentifier:@"MoviePosterCollectionViewCell"];
     collectionView.dataSource = self;
@@ -128,9 +128,8 @@
                                                     [self performSelectorOnMainThread:@selector(reloadTheData) withObject:(nil) waitUntilDone:(NO)];
                                                     
                                                     NSLog(@"\n\n\t SLEEPING FOR 2 seconds to see progress HUB\n\n");
-                                                    [NSThread sleepForTimeInterval:1.0f];
+                                                    sleep(2);
                                                     [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                                    
                                                 } else {
                                                     NSLog(@"An error occurred: %@", error.description);
                                                 }
