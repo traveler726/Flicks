@@ -103,6 +103,7 @@
                         <outlet property="errorView" destination="pEZ-2j-jNk" id="9HK-Vl-nSP"/>
                         <outlet property="movieTableView" destination="I7C-R6-9tw" id="fD0-W7-bxl"/>
                         <outlet property="seqControl" destination="DWA-c9-Pku" id="RCQ-a9-Fad"/>
+                        <segue destination="r6i-gp-OB4" kind="push" identifier="showMovieDetailsFromGridControllerSeque" id="l8t-rx-TPk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -254,6 +255,7 @@
                     <connections>
                         <outlet property="movieTableView" destination="Hcd-ZY-BEE" id="bQw-h9-MUa"/>
                         <outlet property="seqControl" destination="4f8-o9-8fY" id="s9J-Ng-cgv"/>
+                        <segue destination="r6i-gp-OB4" kind="push" identifier="showMovieDetailsFromGridControllerSeque" id="7JC-L8-rVW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EcY-eu-uso" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -309,6 +311,6 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="bMW-xd-9eQ"/>
+        <segue reference="7JC-L8-rVW"/>
     </inferredMetricsTieBreakers>
 </document>

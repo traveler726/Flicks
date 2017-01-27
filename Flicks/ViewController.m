@@ -234,7 +234,7 @@
     });
 }
 
-#pragma mark - UICollectionViewDataSource
+#pragma mark - UICollectionViewDataSource  didSelectItemAtPath
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.movies.count;
@@ -251,6 +251,10 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"showMovieDetailsFromGridControllerSeque" sender:indexPath];
+}
 
 // Moving the reload of the data into a separate method so can push to the main thread.
 - (void) reloadTheData {
@@ -297,6 +301,13 @@
         NSIndexPath *indexPath = [self.movieTableView indexPathForCell:((UITableViewCell *) sender)];
         destViewController.movieModel = [self.movies objectAtIndex:indexPath.row];
         
+    } else if ([segue.identifier isEqualToString:@"showMovieDetailsFromGridControllerSeque"] ) {
+        
+        MovieDetailViewController *destViewController = [segue destinationViewController];
+        //NSIndexPath *indexPath = [self.collectionView indexPathForCell:((MoviePosterCollectionViewCell *) sender)];
+        //destViewController.movieModel = [self.movies objectAtIndex:indexPath.item];
+        destViewController.movieModel = [self.movies objectAtIndex:((NSIndexPath *)sender).item];
+        
     }
 }
 #pragma mark segmentation control
@@ -311,8 +322,7 @@
     } else {
         NSLog (@"Handling the click for the Grid View of the movies %ld", segIndex);
         self.movieTableView.hidden = YES;
-        self.collectionView.hidden = NO;
-        
+        self.collectionView.hidden = NO;    
     }
 }
 
