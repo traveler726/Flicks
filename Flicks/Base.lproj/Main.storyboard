@@ -90,8 +90,8 @@
                                 <rect key="frame" x="276" y="8" width="83" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="List"/>
-                                    <segment title="Grid"/>
+                                    <segment title="" image="lines.png"/>
+                                    <segment title="" image="gird.png"/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentValueChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="tj6-jG-Vmg"/>
@@ -268,8 +268,8 @@
                                 <rect key="frame" x="209" y="8" width="150" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="List"/>
-                                    <segment title="Grid"/>
+                                    <segment title="" image="lines.png"/>
+                                    <segment title="" image="gird.png"/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentValueChange:" destination="2w6-43-Eyq" eventType="valueChanged" id="1mI-on-2IF"/>
@@ -329,6 +329,8 @@
     <resources>
         <image name="clapboard.png" width="26" height="26"/>
         <image name="error.png" width="50" height="50"/>
+        <image name="gird.png" width="18" height="18"/>
+        <image name="lines.png" width="18" height="18"/>
         <image name="star-empty.png" width="32" height="32"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
