@@ -142,9 +142,14 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMM d, h:mm a"];
     NSLog(@"Refreshing the data and view @ %@...", [formatter stringFromDate:[NSDate date]]);
-    [self fetchMovies];
-    [self reloadTheData];
-    [self.refreshControl endRefreshing];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Your main thread code goes in here
+        [self fetchMovies];
+        [self reloadTheData];
+        [self.refreshControl endRefreshing];
+
+    });
 }
 
 #pragma mark - UICollectionViewDataSource
