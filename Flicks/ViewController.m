@@ -136,7 +136,7 @@
                                                     // dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                                     //    [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                     //});
-                                                    sleep(2);
+                                                    //sleep(2);
                                                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                 } else {
                                                     [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -161,7 +161,7 @@
     // Align errorView frame to top right of the parent view.
     CGRect frame = self.errorView.frame;
     CGFloat xPosition = self.errorView.frame.origin.x;
-    CGFloat yPosition = self.errorView.frame.size.height; // better would be to figure out height of the top nav bar.
+    CGFloat yPosition = 64; // 64 is top nav size for all devices self.errorView.frame.size.height; // better would be to figure out height of the top nav bar.
     frame.origin = CGPointMake(xPosition, yPosition);
     self.errorView.frame = frame;
 
