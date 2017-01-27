@@ -84,10 +84,25 @@
                         <color key="backgroundColor" red="1" green="0.79692828339999999" blue="0.2406887922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Now Playing" image="clapboard.png" id="Fw4-gj-Egp"/>
-                    <navigationItem key="navigationItem" id="W6L-3l-QtA"/>
+                    <navigationItem key="navigationItem" id="W6L-3l-QtA">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="u0E-t6-aoh">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="DWA-c9-Pku">
+                                <rect key="frame" x="276" y="8" width="83" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="List"/>
+                                    <segment title="Grid"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentValueChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="tj6-jG-Vmg"/>
+                                </connections>
+                            </segmentedControl>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="errorView" destination="pEZ-2j-jNk" id="9HK-Vl-nSP"/>
                         <outlet property="movieTableView" destination="I7C-R6-9tw" id="fD0-W7-bxl"/>
+                        <outlet property="seqControl" destination="DWA-c9-Pku" id="RCQ-a9-Fad"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
