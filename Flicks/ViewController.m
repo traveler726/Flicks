@@ -28,6 +28,8 @@
 @property (strong, nonatomic) UIRefreshControl *refreshTableControl;
 @property (strong, nonatomic) UIRefreshControl *refreshCollectionControl;
 
+@property (weak, nonatomic) IBOutlet UIView *errorView;
+
 @end
 
 @implementation ViewController
@@ -50,11 +52,12 @@
     [self setupCollectionView];
     
     // Which View should be visible first?
-    self.collectionView.hidden = NO;
+    self.collectionView.hidden = YES;
     self.movieTableView.hidden = !self.collectionView.hidden;
     
-    [self fetchMovies];
+    [self setupErrorView];
     
+    [self fetchMovies];
     
     [self setupRefresh];
     
@@ -128,15 +131,60 @@
                                                     [self performSelectorOnMainThread:@selector(reloadTheData) withObject:(nil) waitUntilDone:(NO)];
                                                     
                                                     NSLog(@"\n\n\t SLEEPING FOR 2 seconds to see progress HUB\n\n");
+                                                    // dispatch is async and allows the table to draw
+                                                    // sleep is blocking this thread.  Meaning only the Progress is visible - no table.
+                                                    // dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                    //    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                                    //});
                                                     sleep(2);
                                                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                 } else {
+                                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                     NSLog(@"An error occurred: %@", error.description);
+
+                                                    SEL errorSelector = @selector(processError:);
+                                                    [self performSelectorOnMainThread:errorSelector withObject:(error.description) waitUntilDone:(YES)];
                                                 }
                                             }];
 
 
     [task resume];
+}
+
+#pragma mark - ErrorProcessing
+
+- (void) setupErrorView {
+    // Make Hidden to start.
+    self.errorView.hidden = YES;
+    self.errorView.layer.zPosition = MAXFLOAT;
+    
+    // Align errorView frame to top right of the parent view.
+    CGRect frame = self.errorView.frame;
+    CGFloat xPosition = self.errorView.frame.origin.x;
+    CGFloat yPosition = self.errorView.frame.size.height; // better would be to figure out height of the top nav bar.
+    frame.origin = CGPointMake(xPosition, yPosition);
+    self.errorView.frame = frame;
+
+}
+- (void) processError :(NSString *)errorMessage {
+    
+    NSLog(@"An error occurred: %@", errorMessage);
+    self.movieTableView.hidden=YES;
+    self.errorView.hidden = NO;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.errorView.hidden = YES;
+        self.movieTableView.hidden=NO;
+    });
+    //  ---> Can't use this menthod.
+    //    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Network Error"
+    //                                                                   message:errorMessage
+    //                                                            preferredStyle:UIAlertControllerStyleAlert];
+    //
+    //    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+    //                                                          handler:^(UIAlertAction * action) {}];
+    //
+    //    [alert addAction:defaultAction];
+    //    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - UIRefreshControl
@@ -157,6 +205,10 @@
 
 
 - (void) refreshTableControlAction {
+    
+//    SEL errorSelector = @selector(processError:);
+//    [self performSelectorOnMainThread:errorSelector withObject:(@"From Table Refresh") waitUntilDone:(YES)];
+
     [self refreshControlAction];
     [self.refreshTableControl endRefreshing];
 }
