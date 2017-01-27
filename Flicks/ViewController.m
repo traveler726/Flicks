@@ -12,6 +12,7 @@
 #import "MovieDetailViewController.h"
 #import "MoviePosterCollectionViewCell.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>  // Adds functionality to the ImageView
+#import <MBProgressHUD.h>
 
 @interface ViewController () <UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate>;
 
@@ -96,6 +97,7 @@
                                   delegate:nil
                              delegateQueue:[NSOperationQueue mainQueue]];  // Delegation to the mainQueue will guarentee it is on the main thread.
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:^(NSData * _Nullable data,
                                                                 NSURLResponse * _Nullable response,
@@ -124,10 +126,17 @@
                                                     
                                                     // force the tableView new info to display
                                                     [self performSelectorOnMainThread:@selector(reloadTheData) withObject:(nil) waitUntilDone:(NO)];
+                                                    
+                                                    NSLog(@"\n\n\t SLEEPING FOR 2 seconds to see progress HUB\n\n");
+                                                    [NSThread sleepForTimeInterval:1.0f];
+                                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                                    
                                                 } else {
                                                     NSLog(@"An error occurred: %@", error.description);
                                                 }
                                             }];
+
+
     [task resume];
 }
 
