@@ -24,15 +24,15 @@
 @property (strong, nonatomic) UICollectionView *collectionView; // Strong manages the destruction better!
 // CollectionView supports dynamic layout that is flexible.  Going to use defaultLayout now - but can do customLayout.
 
-@property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) UIRefreshControl *refreshTableControl;
+@property (strong, nonatomic) UIRefreshControl *refreshCollectionControl;
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setupRefresh];
     
     // Do any additional setup after loading the view, typically from a nib.
     self.movieTableView.dataSource = self;    //if ([self.restorationIdentifier]
@@ -49,10 +49,13 @@
     [self setupCollectionView];
     
     // Which View should be visible first?
-    self.collectionView.hidden = YES;
+    self.collectionView.hidden = NO;
     self.movieTableView.hidden = !self.collectionView.hidden;
     
     [self fetchMovies];
+    
+    
+    [self setupRefresh];
     
 }
 
@@ -130,12 +133,28 @@
 
 #pragma mark - UIRefreshControl
 
+// Can't set the same UIView as sub-view into two "containing views".  So need to create both!
 - (void) setupRefresh {
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(refreshControlAction) forControlEvents:UIControlEventValueChanged];
-    self.refreshControl = refreshControl;
-    [self.movieTableView addSubview:refreshControl];
-    [self.collectionView addSubview:refreshControl];
+    UIRefreshControl *refreshTableControl = [[UIRefreshControl alloc] init];
+    [refreshTableControl addTarget:self action:@selector(refreshTableControlAction) forControlEvents:UIControlEventValueChanged];
+    self.refreshTableControl = refreshTableControl;
+    [self.movieTableView addSubview:refreshTableControl];
+    
+    
+    UIRefreshControl *refreshCollectionControl = [[UIRefreshControl alloc] init];
+    [refreshCollectionControl addTarget:self action:@selector(refreshCollectionControlAction) forControlEvents:UIControlEventValueChanged];
+    self.refreshCollectionControl = refreshCollectionControl;
+    [self.collectionView addSubview:refreshCollectionControl];
+}
+
+
+- (void) refreshTableControlAction {
+    [self refreshControlAction];
+    [self.refreshTableControl endRefreshing];
+}
+- (void) refreshCollectionControlAction {
+    [self refreshControlAction];
+    [self.refreshCollectionControl endRefreshing];
 }
 
 - (void) refreshControlAction {
@@ -150,8 +169,8 @@
         //Your main thread code goes in here
         [self fetchMovies];
         [self reloadTheData];
-        [self.refreshControl endRefreshing];
-
+//      [self.refreshTableControl      endRefreshing];
+//      [self.refreshCollectionControl endRefreshing];
     });
 }
 
