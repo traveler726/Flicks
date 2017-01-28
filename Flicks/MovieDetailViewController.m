@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleView;       // Inside scrollableView container
 @property (weak, nonatomic) IBOutlet UILabel *overviewView;    // Inside scrollableView container
 @property (weak, nonatomic) IBOutlet UILabel *releaseDateView;
+@property (weak, nonatomic) IBOutlet UILabel *userScoreView;
 
 @end
 
@@ -82,10 +83,12 @@
         self.titleView.text       = self.movieModel.title;
         self.overviewView.text    = self.movieModel.movieDescription;
         self.releaseDateView.text = [self.movieModel releaseDateAsString];
+        self.userScoreView.text   = [self.movieModel.userScore stringValue];
 
         [self.titleView sizeToFit];
         [self.overviewView sizeToFit];
         [self.releaseDateView sizeToFit];
+        [self.userScoreView sizeToFit];
         [self.posterImageView setImageWithURL:self.movieModel.posterURL];
     }
 }

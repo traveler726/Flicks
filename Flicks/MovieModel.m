@@ -19,9 +19,8 @@
         // Initial the model by parsing the JSON Dictionary
         self.title = dictionary[@"original_title"];
         self.movieDescription = dictionary[@"overview"];
-        
-        //id rd = dictionary[@"release_date"];
-        
+        self.userScore = [NSNumber numberWithFloat:[dictionary[@"vote_average"] floatValue]];
+        NSLog (@"Title: %@ UserScore: %@", self.title, self.userScore);
         [self setReleaseDateFromString:dictionary[@"release_date"]];
         
         // Build the image path from the poster path and API:
