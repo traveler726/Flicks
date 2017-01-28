@@ -20,6 +20,10 @@
         self.title = dictionary[@"original_title"];
         self.movieDescription = dictionary[@"overview"];
         
+        //id rd = dictionary[@"release_date"];
+        
+        [self setReleaseDateFromString:dictionary[@"release_date"]];
+        
         // Build the image path from the poster path and API:
         // The movie poster is available by appending the returned poster_path to https://image.tmdb.org/t/p/w342.
         
@@ -35,6 +39,22 @@
     }
     
     return self;
+}
+
+- (void) setReleaseDateFromString:(NSString *) dateString {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    //NSDate *releaseDate = [dateFormatter dateFromString:releaseDateStr];
+    self.releaseDate = [dateFormatter dateFromString:dateString];
+    NSLog(@"TItle: %@ Release Date: %@", self.title, [self releaseDateAsString]);
+}
+
+- (NSString *) releaseDateAsString {
+    // Format: MMMM d, yyyy ==> January 27, 2017
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMMM d, yyyy"];
+    NSString *strDate = [dateFormatter stringFromDate:self.releaseDate];
+    return strDate;
 }
 
 @end

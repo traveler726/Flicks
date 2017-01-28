@@ -18,5 +18,7 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *movieDescription;
 @property (nonatomic, strong) NSURL    *posterURL;
+@property (nonatomic, strong) NSDate   *releaseDate;
 
+- (NSString *) releaseDateAsString;
 @end

@@ -130,13 +130,13 @@
                                                     // force the tableView new info to display
                                                     [self performSelectorOnMainThread:@selector(reloadTheData) withObject:(nil) waitUntilDone:(NO)];
                                                     
-                                                    NSLog(@"\n\n\t SLEEPING FOR 2 seconds to see progress HUB\n\n");
+                                                    NSLog(@"\n\n\t SLEEPING FOR 1 seconds to see progress HUB\n\n");
                                                     // dispatch is async and allows the table to draw
                                                     // sleep is blocking this thread.  Meaning only the Progress is visible - no table.
                                                     // dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                                     //    [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                     //});
-                                                    //sleep(2);
+                                                    sleep(1);
                                                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                 } else {
                                                     [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -170,10 +170,11 @@
     
     NSLog(@"An error occurred: %@", errorMessage);
     self.movieTableView.hidden=YES;
+    self.collectionView.hidden=YES;
     self.errorView.hidden = NO;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.errorView.hidden = YES;
-        self.movieTableView.hidden=NO;
+        [self setupSelectedView];
     });
     //  ---> Can't use this menthod.
     //    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Network Error"
@@ -300,6 +301,7 @@
         //NSIndexPath *indexPath = [self.movieTableView indexPathForCell:tableCell];
         NSIndexPath *indexPath = [self.movieTableView indexPathForCell:((UITableViewCell *) sender)];
         destViewController.movieModel = [self.movies objectAtIndex:indexPath.row];
+        [self.movieTableView deselectRowAtIndexPath:[self.movieTableView indexPathForSelectedRow] animated:YES];
         
     } else if ([segue.identifier isEqualToString:@"showMovieDetailsFromGridControllerSeque"] ) {
         

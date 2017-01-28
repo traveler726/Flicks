@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIView *scrollableView;   // Scrollable View container inside scrollView
 @property (weak, nonatomic) IBOutlet UILabel *titleView;       // Inside scrollableView container
 @property (weak, nonatomic) IBOutlet UILabel *overviewView;    // Inside scrollableView container
+@property (weak, nonatomic) IBOutlet UILabel *releaseDateView;
 
 @end
 
@@ -47,6 +48,7 @@
     //          Best way is to get the max y of the overview which is relative
     //            the view it is contained within.
     CGFloat maxOverviewY = CGRectGetMaxY(self.overviewView.frame);
+    CGFloat minOverviewY = CGRectGetMinY(self.overviewView.frame);
     CGFloat maxTitleY    = CGRectGetMaxY(self.titleView.frame);
     
     // Step 3 - set the frame size of the scrollable item view container (or the card in the ScrollView)
@@ -54,7 +56,7 @@
     scrollableViewFrame.size.height = maxOverviewY;
     
     // Step 4 - set the frame starting position relative to the container offset!
-    scrollableViewFrame.origin.y = scrollableViewFrame.size.height - maxTitleY;
+    scrollableViewFrame.origin.y = scrollableViewFrame.size.height - minOverviewY - 10;
     self.scrollableView.frame    = scrollableViewFrame;
     
     // Step 5 - Set the scrollView contentSize based on the scrollable itemview within.
@@ -77,9 +79,13 @@
     NSLog (@"TBD - fetch the movie details here");
     if (self.movieModel) {
         NSLog (@"Detail called with movie: %@", self.movieModel);
-        self.titleView.text    = self.movieModel.title;
-        self.overviewView.text = self.movieModel.movieDescription;
+        self.titleView.text       = self.movieModel.title;
+        self.overviewView.text    = self.movieModel.movieDescription;
+        self.releaseDateView.text = [self.movieModel releaseDateAsString];
+
+        [self.titleView sizeToFit];
         [self.overviewView sizeToFit];
+        [self.releaseDateView sizeToFit];
         [self.posterImageView setImageWithURL:self.movieModel.posterURL];
     }
 }
